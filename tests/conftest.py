@@ -1,8 +1,10 @@
 import pytest
+from unittest.mock import MagicMock
 from hedera_sdk_python.account.account_id import AccountId
 from hedera_sdk_python.tokens.token_id import TokenId
 from hedera_sdk_python.crypto.private_key import PrivateKey
 from cryptography.hazmat.primitives import serialization
+from hedera_sdk_python.hapi import basic_types_pb2
 
 @pytest.fixture
 def mock_account_ids():
@@ -13,3 +15,13 @@ def mock_account_ids():
     token_id_1 = TokenId(1, 1, 1)
     token_id_2 = TokenId(2, 2, 2)
     return account_id_sender, account_id_recipient, node_account_id, token_id_1, token_id_2
+
+@pytest.fixture
+def amount():
+    """Fixture to provide a default amount for fungible tokens."""
+    return 1000
+
+@pytest.fixture
+def metadata():
+    """Fixture to provide mock metadata for NFTs."""
+    return [b'a']

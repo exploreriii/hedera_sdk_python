@@ -57,6 +57,7 @@ def test_build_transaction_body(mock_account_ids):
     token_tx.set_treasury_account_id(treasury_account)
     token_tx.transaction_id = generate_transaction_id(treasury_account)
     token_tx.set_admin_key(private_key_admin)
+    token_tx.set_supply_key(private_key_admin)
     token_tx.node_account_id = node_account_id
 
     transaction_body = token_tx.build_transaction_body()
@@ -66,6 +67,8 @@ def test_build_transaction_body(mock_account_ids):
     assert transaction_body.tokenCreation.decimals == 2
     assert transaction_body.tokenCreation.initialSupply == 1000
     assert transaction_body.tokenCreation.adminKey.ed25519 == b'admin_public_key'
+    assert transaction_body.tokenCreation.supplyKey.ed25519 == b'admin_public_key'
+
 
 def test_missing_fields():
     """Test that building a transaction without required fields raises a ValueError."""
