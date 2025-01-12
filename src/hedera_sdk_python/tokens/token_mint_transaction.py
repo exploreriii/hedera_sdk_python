@@ -60,26 +60,11 @@ class TokenMintTransaction(Transaction):
         if (self.amount is not None) and (self.metadata is not None):
             raise ValueError("Specify either amount for fungible tokens or metadata for NFTs, not both.")
 
-        # Need to create the TokenInfo class!
-        # token_info = client.get_token_info(self.token_id)
-        # if not token_info or token_info.is_deleted:
-        #     raise ValueError("Cannot mint: token either doesn't exist or is deleted.")
-        # if not token_info.supply_key or token_info.supply_key.is_empty_keylist:
-        #     raise ValueError("Cannot mint: token does not have a valid supply key.")
-        # if supply_key.public_key_bytes != token_info.supply_key.public_key_bytes:
-        #     raise ValueError("The key provided does not match the token's supply key.")
-
         if self.amount is not None:
             # Minting fungible tokens
             if self.amount <= 0:
                 raise ValueError("Amount to mint must be positive.")
         
-            # if self.amount is not None:
-            #     current_supply = token_info.total_supply
-            #     max_supply = 2**63 - 1
-            #     if current_supply + self.amount > max_supply:
-            #         raise ValueError("Cannot mint: would exceed 2^63 - 1 total supply limit.")
-
             token_mint_body = token_mint_pb2.TokenMintTransactionBody(
                 token=self.token_id.to_proto(),
                 amount=self.amount,
