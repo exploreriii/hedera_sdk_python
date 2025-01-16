@@ -18,6 +18,7 @@ from hedera_sdk_python.consensus.topic_delete_transaction import TopicDeleteTran
 from hedera_sdk_python.consensus.topic_id import TopicId
 from hedera_sdk_python.query.topic_info_query import TopicInfoQuery
 from hedera_sdk_python.query.account_balance_query import CryptoGetAccountBalanceQuery
+from hedera_sdk_python.tokens.token_type import TokenType
 
 load_dotenv()
 
@@ -70,6 +71,7 @@ def create_token(client, operator_id, admin_key):
         decimals=2,
         initial_supply=1000,
         treasury_account_id=operator_id,
+        token_type=TokenType.FUNGIBLE_COMMON,
         admin_key=admin_key
     )
     transaction.freeze_with(client)

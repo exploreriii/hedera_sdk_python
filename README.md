@@ -169,6 +169,7 @@ balance = ( CryptoGetAccountBalanceQuery() .set_account_id(some_account_id) .exe
 ```
 
 ### Creating a Token
+You can choose to create either a fungible (common) or non-fungible (unique) token.
 
 #### Pythonic Syntax:
 ```
@@ -177,6 +178,7 @@ transaction = TokenCreateTransaction(
     token_symbol="EXT",
     decimals=2,
     initial_supply=1000,
+    token_type=TokenType.FUNGIBLE_COMMON,  # or TokenType.NON_FUNGIBLE_UNIQUE
     treasury_account_id=operator_id,
     admin_key=admin_key
 ).freeze_with(client)
@@ -194,6 +196,7 @@ transaction = (
         .set_token_symbol("EXT")
         .set_decimals(2)
         .set_initial_supply(1000)
+        .set_token_type(TokenType.FUNGIBLE_COMMON)
         .set_treasury_account_id(operator_id)
         .set_admin_key(admin_key) # Optional to create a token. Necessary for Token Delete or Update.
         .freeze_with(client)

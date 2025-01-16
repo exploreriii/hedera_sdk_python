@@ -8,6 +8,7 @@ from hedera_sdk_python.crypto.private_key import PrivateKey
 from hedera_sdk_python.tokens.token_create_transaction import TokenCreateTransaction
 from hedera_sdk_python.client.network import Network
 from cryptography.hazmat.primitives import serialization
+from hedera_sdk_python.tokens.token_type import TokenType
 
 load_dotenv()
 
@@ -28,6 +29,7 @@ def create_token():
         .set_decimals(2)
         .set_initial_supply(10)
         .set_treasury_account_id(operator_id)
+        .set_token_type(TokenType.FUNGIBLE_COMMON)
         .set_admin_key(admin_key)
         .freeze_with(client)
         .sign(operator_key)
